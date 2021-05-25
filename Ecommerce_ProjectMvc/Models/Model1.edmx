@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Ecommerce_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin_Tbl">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ContactUS_Tbl">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMS" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Tbl_invoice">
+          <Key>
+            <PropertyRef Name="Invoice_id" />
+          </Key>
+          <Property Name="Invoice_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="In_fk_user" Type="int" />
+          <Property Name="In_date" Type="datetime" />
+          <Property Name="In_totalbill" Type="float" />
+        </EntityType>
+        <EntityType Name="Tbl_order">
+          <Key>
+            <PropertyRef Name="Order_id" />
+          </Key>
+          <Property Name="Order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="O_fk_pro" Type="int" />
+          <Property Name="O_fk_invoice" Type="int" />
+          <Property Name="O_date" Type="datetime" />
+          <Property Name="O_qty" Type="int" />
+          <Property Name="O_bill" Type="float" />
+          <Property Name="O_unitprice" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_product">
+          <Key>
+            <PropertyRef Name="Pro_id" />
+          </Key>
+          <Property Name="Pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pro_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pro_price" Type="int" Nullable="false" />
+          <Property Name="Pro_des" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Pro_image" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_user">
+          <Key>
+            <PropertyRef Name="U_id" />
+          </Key>
+          <Property Name="U_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="U_contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="U_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Tbl_invoi__In_fk__2A4B4B5E">
+          <End Role="Tbl_user" Type="Self.Tbl_user" Multiplicity="0..1" />
+          <End Role="Tbl_invoice" Type="Self.Tbl_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_user">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="Tbl_invoice">
+              <PropertyRef Name="In_fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_order__O_fk___2D27B809">
+          <End Role="Tbl_product" Type="Self.Tbl_product" Multiplicity="0..1" />
+          <End Role="Tbl_order" Type="Self.Tbl_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_product">
+              <PropertyRef Name="Pro_id" />
+            </Principal>
+            <Dependent Role="Tbl_order">
+              <PropertyRef Name="O_fk_pro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_order__O_fk___2E1BDC42">
+          <End Role="Tbl_invoice" Type="Self.Tbl_invoice" Multiplicity="0..1" />
+          <End Role="Tbl_order" Type="Self.Tbl_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_invoice">
+              <PropertyRef Name="Invoice_id" />
+            </Principal>
+            <Dependent Role="Tbl_order">
+              <PropertyRef Name="O_fk_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ecommerce_ProjectModelStoreContainer">
+          <EntitySet Name="Admin_Tbl" EntityType="Self.Admin_Tbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactUS_Tbl" EntityType="Self.ContactUS_Tbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_invoice" EntityType="Self.Tbl_invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_order" EntityType="Self.Tbl_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_product" EntityType="Self.Tbl_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_user" EntityType="Self.Tbl_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tbl_invoi__In_fk__2A4B4B5E" Association="Self.FK__Tbl_invoi__In_fk__2A4B4B5E">
+            <End Role="Tbl_user" EntitySet="Tbl_user" />
+            <End Role="Tbl_invoice" EntitySet="Tbl_invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_order__O_fk___2D27B809" Association="Self.FK__Tbl_order__O_fk___2D27B809">
+            <End Role="Tbl_product" EntitySet="Tbl_product" />
+            <End Role="Tbl_order" EntitySet="Tbl_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_order__O_fk___2E1BDC42" Association="Self.FK__Tbl_order__O_fk___2E1BDC42">
+            <End Role="Tbl_invoice" EntitySet="Tbl_invoice" />
+            <End Role="Tbl_order" EntitySet="Tbl_order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ecommerce_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_invoice">
+          <Key>
+            <PropertyRef Name="Invoice_id" />
+          </Key>
+          <Property Name="Invoice_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="In_fk_user" Type="Int32" />
+          <Property Name="In_date" Type="DateTime" Precision="3" />
+          <Property Name="In_totalbill" Type="Double" />
+          <NavigationProperty Name="Tbl_user" Relationship="Self.FK__Tbl_invoi__In_fk__2A4B4B5E" FromRole="Tbl_invoice" ToRole="Tbl_user" />
+          <NavigationProperty Name="Tbl_order" Relationship="Self.FK__Tbl_order__O_fk___2E1BDC42" FromRole="Tbl_invoice" ToRole="Tbl_order" />
+        </EntityType>
+        <EntityType Name="Tbl_order">
+          <Key>
+            <PropertyRef Name="Order_id" />
+          </Key>
+          <Property Name="Order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="O_fk_pro" Type="Int32" />
+          <Property Name="O_fk_invoice" Type="Int32" />
+          <Property Name="O_date" Type="DateTime" Precision="3" />
+          <Property Name="O_qty" Type="Int32" />
+          <Property Name="O_bill" Type="Double" />
+          <Property Name="O_unitprice" Type="Int32" />
+          <NavigationProperty Name="Tbl_invoice" Relationship="Self.FK__Tbl_order__O_fk___2E1BDC42" FromRole="Tbl_order" ToRole="Tbl_invoice" />
+          <NavigationProperty Name="Tbl_product" Relationship="Self.FK__Tbl_order__O_fk___2D27B809" FromRole="Tbl_order" ToRole="Tbl_product" />
+        </EntityType>
+        <EntityType Name="Tbl_product">
+          <Key>
+            <PropertyRef Name="Pro_id" />
+          </Key>
+          <Property Name="Pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pro_price" Type="Int32" Nullable="false" />
+          <Property Name="Pro_des" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pro_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_order" Relationship="Self.FK__Tbl_order__O_fk___2D27B809" FromRole="Tbl_product" ToRole="Tbl_order" />
+        </EntityType>
+        <EntityType Name="Tbl_user">
+          <Key>
+            <PropertyRef Name="U_id" />
+          </Key>
+          <Property Name="U_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="U_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="U_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_invoice" Relationship="Self.FK__Tbl_invoi__In_fk__2A4B4B5E" FromRole="Tbl_user" ToRole="Tbl_invoice" />
+        </EntityType>
+        <Association Name="FK__Tbl_invoi__In_fk__2A4B4B5E">
+          <End Role="Tbl_user" Type="Self.Tbl_user" Multiplicity="0..1" />
+          <End Role="Tbl_invoice" Type="Self.Tbl_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_user">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="Tbl_invoice">
+              <PropertyRef Name="In_fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_order__O_fk___2E1BDC42">
+          <End Role="Tbl_invoice" Type="Self.Tbl_invoice" Multiplicity="0..1" />
+          <End Role="Tbl_order" Type="Self.Tbl_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_invoice">
+              <PropertyRef Name="Invoice_id" />
+            </Principal>
+            <Dependent Role="Tbl_order">
+              <PropertyRef Name="O_fk_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_order__O_fk___2D27B809">
+          <End Role="Tbl_product" Type="Self.Tbl_product" Multiplicity="0..1" />
+          <End Role="Tbl_order" Type="Self.Tbl_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_product">
+              <PropertyRef Name="Pro_id" />
+            </Principal>
+            <Dependent Role="Tbl_order">
+              <PropertyRef Name="O_fk_pro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ecommerce_ProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_invoice" EntityType="Self.Tbl_invoice" />
+          <EntitySet Name="Tbl_order" EntityType="Self.Tbl_order" />
+          <EntitySet Name="Tbl_product" EntityType="Self.Tbl_product" />
+          <EntitySet Name="Tbl_user" EntityType="Self.Tbl_user" />
+          <AssociationSet Name="FK__Tbl_invoi__In_fk__2A4B4B5E" Association="Self.FK__Tbl_invoi__In_fk__2A4B4B5E">
+            <End Role="Tbl_user" EntitySet="Tbl_user" />
+            <End Role="Tbl_invoice" EntitySet="Tbl_invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_order__O_fk___2E1BDC42" Association="Self.FK__Tbl_order__O_fk___2E1BDC42">
+            <End Role="Tbl_invoice" EntitySet="Tbl_invoice" />
+            <End Role="Tbl_order" EntitySet="Tbl_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_order__O_fk___2D27B809" Association="Self.FK__Tbl_order__O_fk___2D27B809">
+            <End Role="Tbl_product" EntitySet="Tbl_product" />
+            <End Role="Tbl_order" EntitySet="Tbl_order" />
+          </AssociationSet>
+          <EntitySet Name="Admin_Tbl" EntityType="Ecommerce_ProjectModel.Admin_Tbl" />
+          <EntitySet Name="ContactUS_Tbl" EntityType="Ecommerce_ProjectModel.ContactUS_Tbl" />
+        </EntityContainer>
+        <EntityType Name="Admin_Tbl">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContactUS_Tbl">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMS" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Ecommerce_ProjectModelStoreContainer" CdmEntityContainer="Ecommerce_ProjectEntities">
+          <EntitySetMapping Name="Tbl_invoice">
+            <EntityTypeMapping TypeName="Ecommerce_ProjectModel.Tbl_invoice">
+              <MappingFragment StoreEntitySet="Tbl_invoice">
+                <ScalarProperty Name="Invoice_id" ColumnName="Invoice_id" />
+                <ScalarProperty Name="In_fk_user" ColumnName="In_fk_user" />
+                <ScalarProperty Name="In_date" ColumnName="In_date" />
+                <ScalarProperty Name="In_totalbill" ColumnName="In_totalbill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_order">
+            <EntityTypeMapping TypeName="Ecommerce_ProjectModel.Tbl_order">
+              <MappingFragment StoreEntitySet="Tbl_order">
+                <ScalarProperty Name="Order_id" ColumnName="Order_id" />
+                <ScalarProperty Name="O_fk_pro" ColumnName="O_fk_pro" />
+                <ScalarProperty Name="O_fk_invoice" ColumnName="O_fk_invoice" />
+                <ScalarProperty Name="O_date" ColumnName="O_date" />
+                <ScalarProperty Name="O_qty" ColumnName="O_qty" />
+                <ScalarProperty Name="O_bill" ColumnName="O_bill" />
+                <ScalarProperty Name="O_unitprice" ColumnName="O_unitprice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_product">
+            <EntityTypeMapping TypeName="Ecommerce_ProjectModel.Tbl_product">
+              <MappingFragment StoreEntitySet="Tbl_product">
+                <ScalarProperty Name="Pro_id" ColumnName="Pro_id" />
+                <ScalarProperty Name="Pro_name" ColumnName="Pro_name" />
+                <ScalarProperty Name="Pro_price" ColumnName="Pro_price" />
+                <ScalarProperty Name="Pro_des" ColumnName="Pro_des" />
+                <ScalarProperty Name="Pro_image" ColumnName="Pro_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_user">
+            <EntityTypeMapping TypeName="Ecommerce_ProjectModel.Tbl_user">
+              <MappingFragment StoreEntitySet="Tbl_user">
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="U_name" ColumnName="U_name" />
+                <ScalarProperty Name="U_contact" ColumnName="U_contact" />
+                <ScalarProperty Name="U_password" ColumnName="U_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admin_Tbl">
+            <EntityTypeMapping TypeName="Ecommerce_ProjectModel.Admin_Tbl">
+              <MappingFragment StoreEntitySet="Admin_Tbl">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactUS_Tbl">
+            <EntityTypeMapping TypeName="Ecommerce_ProjectModel.ContactUS_Tbl">
+              <MappingFragment StoreEntitySet="ContactUS_Tbl">
+                <ScalarProperty Name="SMS" ColumnName="SMS" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

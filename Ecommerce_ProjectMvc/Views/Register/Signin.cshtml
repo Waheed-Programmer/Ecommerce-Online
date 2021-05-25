@@ -1,0 +1,127 @@
+﻿@model Ecommerce_ProjectMvc.Models.Tbl_user
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Signin";
+}
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+</head>
+
+<style>
+
+
+    input[type="submit"]:hover {
+        background-color: black;
+    }
+</style>
+
+@using (Html.BeginForm("Signin", "Register", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="page-title parallax parallax1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title-heading">
+                        <h1 class="title">SignUp Now</h1>
+                    </div><!-- /.page-title-heading -->
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a>@Html.ActionLink("Home", "Index", "Home1")</a></li>
+                            <li><a>@Html.ActionLink("Register", "Signin", "Register")</a></li>
+                        </ul>
+                    </div><!-- /.breadcrumbs -->
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div><!-- /.page-title -->
+
+
+    <section class="flat-row flat-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-section margin_bottom_17">
+                        <h2 class="title">
+                            Create Account Here
+                        </h2>
+                    </div><!-- /.title-section -->
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+
+            <div class="row">
+                <div class="col-md-6 offset-md-3 form-block px-4">
+
+                    <form novalidate="" class="contact-form" id="contactform" method="post" action="#">
+                        <div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div>
+                                <label>Name</label>
+
+                                @Html.EditorFor(model => model.U_name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.U_name, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="contact-email">
+                                <label>Contact No</label>
+                                @Html.EditorFor(model => model.U_contact, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.U_contact, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="contact-email">
+                                <label>Password</label>
+                                @Html.EditorFor(model => model.U_password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.U_password, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-submit margin-top-32 ">
+                            <input type="submit" value="Register" class="contact-submit btn-block" style="font-weight:bold; color:white;" />
+
+
+                        </div><br />
+                        <div class="text-center mb-5">
+                            Do you have an account?
+                            <a class="register-link"><b>@Html.ActionLink("Login here", "Login", "Register")</b></a>
+                        </div>
+                    </form>
+                </div><!-- /.wrap-contact -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section><!-- /.flat-row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

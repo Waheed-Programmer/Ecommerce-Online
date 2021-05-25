@@ -1,0 +1,96 @@
+﻿@model Ecommerce_ProjectMvc.Models.Tbl_user
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<style>
+    
+
+    input[type="submit"]:hover {
+        background-color: black;
+    }
+</style>
+
+
+@using (Html.BeginForm("Login", "Register", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <!-- Page title -->
+    <div class="page-title parallax parallax1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title-heading">
+                        <h1 class="title">Login</h1>
+                    </div><!-- /.page-title-heading -->
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a>@Html.ActionLink("Home", "Index", "Home1")</a></li>
+                            <li><a>@Html.ActionLink("Login", "Login", "Register")</a></li>
+                        </ul>
+                    </div><!-- /.breadcrumbs -->
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div><!-- /.page-title -->
+
+
+    <section class="flat-row flat-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-section margin_bottom_17">
+                        <h2 class="title">
+                            Login Here
+                        </h2>
+                    </div><!-- /.title-section -->
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+
+            <div class="row">
+                <div class="col-md-6 offset-md-3 form-block px-4">
+
+                    <form novalidate="" class="contact-form" id="contactform" method="post" action="#">
+                        <div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div>
+                                <label>Name</label>
+
+                                @Html.EditorFor(model => model.U_name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.U_name, "", new { @class = "text-danger" })
+                               
+                            </div>
+                            <div class="contact-email">
+                                <label>Password</label>
+                                @Html.EditorFor(model => model.U_password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.U_password, "", new { @class = "text-danger" })
+                               
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-submit margin-top-32 ">
+                            <input type="submit" value="Login" class="contact-submit btn-block " style="font-weight:bold; color:white;" />
+                           
+                        </div><br />
+                        <div class="text-center mb-5">
+                            Don't have an account?
+                            <a class="register-link"><b>@Html.ActionLink("SignUp here", "Signin", "Register")</b></a>
+                        </div>
+                    </form>
+                </div><!-- /.wrap-contact -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section><!-- /.flat-row -->
+
+
+
+
+
+}
+

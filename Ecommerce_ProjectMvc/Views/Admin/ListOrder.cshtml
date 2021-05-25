@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Ecommerce_ProjectMvc.Models.Tbl_order>
+
+@{
+    ViewBag.Title = "All OrderList > Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Order Information</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>
+                        Date
+                        @*@Html.DisplayNameFor(model => model.O_date)*@
+                    </th>
+                    <th>
+                        ID
+                        @*@Html.DisplayNameFor(model => model.Order_id)*@
+
+                    </th>
+                    <th>
+                        Product Name
+                        @*@Html.DisplayNameFor(model => model.Tbl_product.Pro_name)*@
+                    </th>
+                    <th>
+                        Unit Price
+                        @*@Html.DisplayNameFor(model => model.O_unitprice)*@
+                    </th>
+                    <th>
+                        Qty
+                        @*@Html.DisplayNameFor(model => model.O_qty)*@
+                    </th>
+                    <th>
+                        TotalBill
+                        @*@Html.DisplayNameFor(model => model.O_bill)*@
+
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.O_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Order_id)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tbl_product.Pro_name)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.O_unitprice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.O_qty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.O_bill)
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+                <tfoot>
+                <td colspan="5"></td>
+                <td class="font-weight-bold"><h4>Total: @TempData["OrderTotal"]</h4></td>
+                </tfoot>
+            </table>
+          
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Ecommerce_ProjectMvc.Models.Tbl_user>
+
+@{
+    ViewBag.Title = "All Users > Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Users List</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+
+                <tr>
+                    <th>
+                        User Name
+                        @*@Html.DisplayNameFor(model => model.U_name)*@
+                    </th>
+                    <th>
+                        Phon Number
+                        @*@Html.DisplayNameFor(model => model.U_contact)*@
+                    </th>
+                    <th>
+                        Password
+                        @*@Html.DisplayNameFor(model => model.U_password)*@
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.U_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.U_contact)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.U_password)
+                        </td>
+                        <td>
+                            
+                            @*@Html.ActionLink("Delete", "Delete", new { id = item.U_id }, new { @class = "btn btn-danger" })*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@model Ecommerce_ProjectMvc.Models.Tbl_product
+
+@{
+    ViewBag.Title = "checkout";
+}
+    <head>
+
+
+
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap" rel="stylesheet">
+
+    </head>
+    <style>
+        .container.table {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        input[type="submit"]:hover {
+            background-color:black;
+        }
+    </style>
+    <br /><br />
+    <div class="container">
+        @if (TempData["Cart"] != null)
+        {
+            <br />
+            <table class="table table-striped table-hover ">
+                <thead class="thead-dark">
+                <th><b>#</b></th>
+                <th><b>NAME</b></th>
+
+                <th><b>PRICE</b></th>
+
+                <th><b>QTY</b></th>
+                <th><b>BILL</b></th>
+                <th><b>CANCEL</b></th>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in TempData["Cart"] as List<Ecommerce_ProjectMvc.Models.Cart>)
+                    {
+                        <tr>
+                            <td class="font-weight-bold">@item.productid</td>
+                            <td class="font-weight-bold">@item.productname</td>
+
+                            <td class="font-weight-bold">@item.price</td>
+                            <td class="font-weight-bold">@item.qty</td>
+                            <td class="font-weight-bold">@item.bill</td>
+                            <td>
+                                <a class="btn btn-sm btn-danger" href="@Url.Action("Remove", new { id = item.productid })">&#10005;</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                <td colspan="5"></td>
+                <td class="font-weight-bold">Total: @TempData["Total"]</td>
+                </tfoot>
+            </table><br />
+
+        }
+
+        else
+        {
+    <br />
+            <h1 style="text-align:center; font-weight:bold;">Cart Is Empty</h1>
+            }
+
+        @if (TempData["Cart"] != null)
+        {
+            using (Html.BeginForm())
+            {
+                <input type="submit" value="SHOP NOW" class="btn btn-success " style="float:right; font-weight:bold; color:white;" />
+            }
+        }
+        <br /><br />
+        <h3 style="font-weight:bold;"> @Html.ActionLink("Go Back", "Index", "Home1")</h3>
+        <br /><br />
+    </div><br /><br />

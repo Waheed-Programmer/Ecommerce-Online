@@ -1,0 +1,77 @@
+﻿@model Ecommerce_ProjectMvc.Models.Tbl_product
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Details";
+}
+
+    <style>
+        .img-responsive {
+            box-shadow: -1px 10px 10px -5px #aaaaaa;
+            -webkit-box-shadow: -1px -1px 8px -1px rgba(0,0,0,0.52);
+            -moz-box-shadow: -1px -1px 8px -1px rgba(0,0,0,0.52);
+        }
+        dd {
+            margin-top:-20px;
+           float:right;
+        }
+        dt{
+            margin-top:17px;
+        }
+    </style>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Detail Products</h6>
+    </div>
+
+    <div class="container">
+        <div class="col-md-8">
+            <dl class="dl-horizontal">
+                <dt>
+                    Product Name
+                    @*@Html.DisplayNameFor(model => model.Pro_name)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Pro_name)
+                </dd>
+
+                <dt>
+                    Product Price
+                    @*@Html.DisplayNameFor(model => model.Pro_price)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Pro_price)
+                </dd>
+
+                <dt>
+                    Description
+                    @*@Html.DisplayNameFor(model => model.Pro_des)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Pro_des)
+                </dd>
+
+
+                <dt>
+                    Image
+                    @*@Html.DisplayNameFor(model => model.Pro_image)*@
+                </dt>
+
+                <dd style="float:right">
+                    <img src="@Url.Content(Model.Pro_image)" class="img-responsive" />
+                </dd>
+
+            </dl>
+
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Pro_id }, new { @class = "btn btn-primary" }) |
+             @Html.ActionLink("Back", "Index")
+        </p>
+    </div>
+   
+</div>

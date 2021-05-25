@@ -1,0 +1,169 @@
+﻿@model Ecommerce_ProjectMvc.Models.ContactUS_Tbl
+
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <head>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+    </head>
+
+    <style>
+
+
+        input[type="submit"]:hover {
+            background-color: black;
+        }
+    </style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="page-title parallax parallax1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title-heading">
+                        <h1 class="title">Contacts</h1>
+                    </div><!-- /.page-title-heading -->
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a>@Html.ActionLink("Home", "Index", "Home1")</a></li>
+                            <li><a>@Html.ActionLink("Contact", "Contact", "Home1")</a></li>
+                        </ul>
+                    </div><!-- /.breadcrumbs -->
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div><!-- /.page-title -->
+
+    <section class="flat-row flat-iconbox">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-section">
+                        <h2 class="title">
+                            Get In Touch
+                        </h2>
+                    </div><!-- /.title-section -->
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="iconbox text-center">
+                        <div class="box-header nomargin">
+                            <div class="icon">
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+                        </div><!-- /.box-header -->
+                        <div class="box-content">
+                            <p>21th Street, Islamabad Pakistan</p>
+                        </div><!-- /.box-content -->
+                    </div><!-- /.iconbox -->
+                </div><!-- /.col-md-4 -->
+                <div class="col-md-4">
+                    <div class="divider h0"></div>
+                    <div class="iconbox text-center">
+                        <div class="box-header">
+                            <div class="icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                        </div><!-- /.box-header -->
+                        <div class="box-content">
+                            <p>+92 302 07680 17</p>
+                        </div><!-- /.box-content -->
+                    </div><!-- /.iconbox -->
+                </div><!-- /.col-md-4 -->
+                <div class="col-md-4">
+                    <div class="divider h0"></div>
+                    <div class="iconbox text-center">
+                        <div class="box-header">
+                            <div class="icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                        </div><!-- /.box-header -->
+                        <div class="box-content">
+                            <p>waheedarshad239@gmail.com</p>
+                        </div><!-- /.box-content -->
+                    </div><!-- /.iconbox -->
+                </div><!-- /.col-md-4 -->
+            </div><!-- /.row -->
+            <div class="divider h43"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flat-map"></div>
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section><!-- /.flat-row -->
+
+    <section class="flat-row flat-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-section margin_bottom_17">
+                        <h2 class="title">
+                            Send Us Email
+                        </h2>
+                    </div><!-- /.title-section -->
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+            <div class="row">
+                <div class="wrap-contact">
+                    <form novalidate="" class="contact-form" id="contactform" method="post" action="#">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-text-wrap clearfix">
+
+                            <div class="contact-name clearfix">
+                                <label>Name</label>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                @*<input type="text" aria-required="true" size="30" value="" name="author" id="author">*@
+                            </div>
+                            <div class="contact-email">
+                                <label>Email</label>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                @*<input type="email" size="30" value="" name="email" id="email">*@
+                            </div>
+                            <div class="contact-subject">
+                                <label>Subject</label>
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                @*<input type="text" aria-required="true" size="30" value="" name="subject" id="subject">*@
+                            </div>
+                        </div>
+
+                        <div class="contact-message clearfix margin-top-40">
+                            <label>Message</label>
+                            @Html.TextAreaFor(model => model.SMS, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SMS, "", new { @class = "text-danger" })
+                            @*<textarea class="" tabindex="4" name="message" required></textarea>*@
+                        </div>
+                        <div class="form-submit margin-top-32 ">
+                            <input type="submit" value="SEND" class="contact-submit" style="font-weight:bold; color:white;" />
+                            @*<button class="contact-submit">SEND</button>*@
+                        </div>
+                    </form>
+                </div><!-- /.wrap-contact -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section><!-- /.flat-row -->
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIEU6OT3xqCksCetQeNLIPps6-AYrhq-s&region=GB"></script>
+
+
+
+
+
+
+   
+}
+
